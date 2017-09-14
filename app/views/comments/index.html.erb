@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<div class="comments_container">
+  <div class="page_header">Comments</div>
+    <% @comments.each do |comment| %>
+      <div class="well">
+        <strong>User: <%= comment.user.name %></strong>
+        <p><%= comment.message %></p>
+        <p><%= link_to 'Delete', comment, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      </div>
+</div>
+    <% end %>

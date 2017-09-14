@@ -1,0 +1,97 @@
+<p id="notice"><%= notice %></p>
+
+<div class="posts_container">
+
+  <% @posts.each do |post| %>
+
+    <p><strong><%= link_to post.title, post %></strong></p>
+    <p>
+      <%= time_ago_in_words(post.created_at) if Time.now - post.created_at < 86400 %>
+      <%= post.created_at.strftime('%b%e') if Time.now - post.created_at > 86400 %>
+    </p>
+
+    <p>
+      <% if post.blog_entry.split("").length > 300 %>
+        <%= post.blog_entry.first(300) %>
+        <%= link_to '...', post %>
+      <% else %>
+        <%= post.blog_entry %>
+      <% end %>
+    </p>
+    <% if can? :update, post %>
+      <%= link_to 'Edit', edit_post_path(post) %>
+      <%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  <% end %>
+
+  <p><%= paginate @posts %></p>
+
+</div>
+
+<div class="news_container">
+  <div class="panel panel_custom">
+      <div class="panel-heading">THE LATEST</div>
+  <div class="panel-body"><% @verge_articles.each_with_index do |article, index| %>
+    <% if article %>
+      <ul>
+        <%= tag.div :class => (index > 1 ? "hide addArts" : "") do %>
+          <div class="article_img">
+            <li><%= link_to (image_tag article['urlToImage'], height: 88, width: 145 ), article['url'], target: :_blank %></li>
+          </div>
+          <div class="article_text">
+            <li><strong><%= link_to (article['title']), article['url'], target: :_blank  %></strong></li>
+            <li>
+              <%= article['author'] %> |
+              <% if article['publishedAt'] %>
+                <%= time_ago_in_words(article['publishedAt']) %>
+              <% end %>
+            </li>
+            <li><%= article['description'] %></li>
+          </div>
+          <br>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <% @techradar_articles.each_with_index do |article, index| %>
+    <% if article %>
+      <ul>
+        <%= tag.div :class => (index > 1 ? "hide addArts" : "") do %>
+          <div class="article_img">
+            <li><%= link_to (image_tag article['urlToImage'], height: 88, width: 145 ), article['url'], target: :_blank %></li>
+          </div>
+          <div class="article_text">
+            <li><strong><%= link_to (article['title']), article['url'], target: :_blank  %></strong></li>
+            <li>
+              <%= article['author'] %> |
+              <% if article['publishedAt'] %>
+                <%= time_ago_in_words(article['publishedAt']) %>
+              <% end %>
+            </li>
+            <li><%= article['description'] %></li>
+          </div>
+          <br>
+        <% end %>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <button id="news_button">Show</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  $("#news_button").click(function() {
+    if ( $("#news_button").text() == "Show" ){
+      $("#news_button").text("Hide")
+    } else if( $("#news_button").text() == "Hide") {
+      $("#news_button").text("Show")
+    }
+    $(".addArts").toggleClass("hide");
+  });
+
+</script>

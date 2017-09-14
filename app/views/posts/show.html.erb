@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<div class="post_title"><strong><%= @post.title.upcase %></strong></div>
+  <div class="post_entry"><%= @post.blog_entry.html_safe %></div>
+    <% if can? :update, @post %>
+    <%= link_to 'Edit', edit_post_path(@post) %>
+    <% end %>
+      <div class="page_header">Leave a Reply</div>
+        <div class="comments_form"><%= render 'comments/form', comment: @comment %></div>
+            <% @post.comments.each do |comment| %>
+              <div class="well_custom">
+                  <p>
+                  <strong><%= comment.user.name %></strong> |
+                  <%= time_ago_in_words(comment.created_at) if Time.now - comment.created_at < 86400 %>
+                  <%= comment.created_at.strftime('%b%e') if Time.now - comment.created_at > 86400 %>
+                  </p>
+                  <p><%= comment.message %></p>
+                  <%= link_to 'edit', edit_comment_path(comment, :post_id => @post.id) %>
+              </div>
+              <% end %>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CyberSecurityBlog</title>
+    <%= csrf_meta_tags %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href='http://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div id="title_header">J SEC</div>
+      <nav class="nav_bar">
+        <ul>
+          <li><a href="/">HOME</a></li>
+          <li><a href="/about">ABOUT</a></li>
+          <li><a href="/contact">CONTACT</a></li>
+          <li class="dropdown">
+           <button class="dropbtn">ACCOUNT</button>
+             <div class="dropdown-account">
+               <% if user_signed_in? %>
+               <%= link_to "EDIT PROFILE", edit_user_registration_path %>
+               <% end %>
+               <% if user_signed_in? %>
+                 <%= link_to "SIGN OUT", destroy_user_session_path, method: :delete %>
+               <% else %>
+               <%= link_to "SIGN IN", new_user_session_path %>
+               <% end %>
+             </div>
+          </li>
+        </ul>
+      </nav>
+
+    <%= yield %>
+
+    <footer>
+
+    </footer>
+
+  </body>
+</html>

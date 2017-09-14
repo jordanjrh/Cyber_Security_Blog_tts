@@ -1,0 +1,38 @@
+.dropbtn {
+  color: #aaa;
+  font-weight: 800;
+  border: none;
+  background-color: #2B2B2B;
+  padding: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-account {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+  background-color: #2B2B2B;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+
+.dropdown-account a {
+  color: #aaa;
+  padding: 4px 8px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown:hover .dropdown-account {
+  display: block;
+}

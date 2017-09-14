@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+  <div class="comments_container">
+    <p><strong><%= @comment.user.name%></strong></p>
+    <p><%= @comment.message %></p>
+    <%= link_to 'Back', comments_path %>
+  </div>
